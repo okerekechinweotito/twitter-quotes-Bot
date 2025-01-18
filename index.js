@@ -1,8 +1,6 @@
 import { TwitterApi } from "twitter-api-v2";
 import dotenv from "dotenv";
-import { useFirebase } from "./api/useFirebase.js";
-import { shortenString } from "./utils/charLimit.js";
-import { downloadImage } from "./utils/downloadImage.js";
+import { generateQuote } from "./utils/generateQuote.js";
 dotenv.config();
 
 const handleTweet = async () => {
@@ -14,23 +12,17 @@ const handleTweet = async () => {
   });
   const tweetClient = twitterClient.readWrite;
 
-  const image = await useFirebase();
-  await downloadImage(image?.smallImage || image?.bigImage, "./image.png");
-
-  const prompt = await shortenString(image.prompt, 165);
-  const upload = await tweetClient.v1.uploadMedia("./image.png");
-  const tweetText = `${prompt} #midjourney #midjourneyart #stablediffusion #AIillustration #ai #aiart #aiartcommunity #aigenerated #bot`;
-  const resp = await tweetClient.v2.tweet(tweetText, {
-    media: {
-      media_ids: [upload],
-    },
-  });
+  const data = await generateQuote();
+  /* const tweetText = `${
+    data && data.quote
+  } #inspirational #wisdom #quotes #famousquotes`; */
+  const tweetText = `${data && data.quote}`;
+  const resp = await tweetClient.v2.tweet(tweetText);
+  console.log("resp:", resp);
   if (resp.errors) {
     console.log("errors:", resp.errors);
   } else {
-    console.log(
-      `Successfully tweeted: ${image.smallImage} with descriptions: ${prompt}`
-    );
+    console.log(`Successfully tweeted: ${data?.quote} from ${data?.tag}`);
   }
   process.exit();
 };

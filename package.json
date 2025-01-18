@@ -1,7 +1,7 @@
 {
   "name": "midjourney-bot",
   "version": "1.0.0",
-  "description": "A Twitter Bot that tweets daily Midjourney generated Images with their prompts",
+  "description": "A Quote Bot that tweets Famous Quotes every hour",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,13 +9,8 @@
   "author": "Okereke Chinweotito",
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.4.0",
-    "dotenv": "^16.0.3",
-    "firebase": "^9.20.0",
-    "fs": "^0.0.1-security",
-    "https": "^1.0.0",
+    "dotenv": "^16.4.7",
     "node-fetch": "^3.3.1",
-    "puppeteer": "^20.7.3",
     "twitter-api-v2": "^1.12.10"
   },
   "type": "module"
