@@ -8,12 +8,12 @@ const api = async (url, tag) => {
     }
     const data = await response.json();
     switch (tag) {
-      case "quotable":
+      /* case "quotable":
         const quote1 = {
           quote: `${data.content} - ${data.author}`,
           tag: "quotable",
         };
-        return quote1;
+        return quote1; */
       case "quoteshub":
         const quote2 = {
           quote: `${data.text} - ${data.author}`,
@@ -33,9 +33,9 @@ const api = async (url, tag) => {
 };
 
 const randomData = async () => {
-  const randomNumber = Math.floor(Math.random() * 3);
+  const randomNumber = Math.floor(Math.random() * 2);
   const pool = [
-    { tag: "quotable", url: "http://api.quotable.io/quotes/random" },
+    /* { tag: "quotable", url: "http://api.quotable.io/quotes/random" }, */
     { tag: "quoteshub", url: "https://thequoteshub.com/api/" },
     {
       tag: "programmingquotes",
