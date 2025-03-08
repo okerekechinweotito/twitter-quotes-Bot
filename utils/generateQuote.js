@@ -7,13 +7,18 @@ const api = async (url, tag) => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    switch (tag) {
-      /* case "quotable":
+    const quote = {
+      quote: `${data.text} - ${data.author}`,
+      tag: tag,
+    };
+    return quote;
+    /*  switch (tag) {
+      case "quotable":
         const quote1 = {
           quote: `${data.content} - ${data.author}`,
           tag: "quotable",
         };
-        return quote1; */
+        return quote1;
       case "quoteshub":
         const quote2 = {
           quote: `${data.text} - ${data.author}`,
@@ -26,7 +31,7 @@ const api = async (url, tag) => {
           tag: "programmingquotes",
         };
         return quote3;
-    }
+    } */
   } catch (error) {
     console.log("error:", error);
   }
@@ -34,16 +39,19 @@ const api = async (url, tag) => {
 
 const randomData = async () => {
   const randomNumber = Math.floor(Math.random() * 2);
-  const pool = [
-    /* { tag: "quotable", url: "http://api.quotable.io/quotes/random" }, */
+  /*  const pool = [
+    { tag: "quotable", url: "http://api.quotable.io/quotes/random" },
     { tag: "quoteshub", url: "https://thequoteshub.com/api/" },
     {
       tag: "programmingquotes",
       url: "https://programming-quotes-api.azurewebsites.net/api/quotes/random",
     },
-  ];
+  ]; 
+  
   const random = pool[randomNumber];
-  const quote = await api(random.url, random.tag);
+  
+  */
+  const quote = await api("https://thequoteshub.com/api/", "quoteshub");
   return quote;
 };
 

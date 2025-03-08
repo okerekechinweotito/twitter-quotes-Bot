@@ -13,10 +13,9 @@ const handleTweet = async () => {
   const tweetClient = twitterClient.readWrite;
 
   const data = await generateQuote();
-  /* const tweetText = `${
+  const tweetText = `${
     data && data.quote
-  } #inspirational #wisdom #quotes #famousquotes`; */
-  const tweetText = `${data && data.quote}`;
+  } #inspirational #wisdom #quotes #famousquotes`;
   const resp = await tweetClient.v2.tweet(tweetText);
   console.log("resp:", resp);
   if (resp.errors) {
